@@ -10,4 +10,3 @@ router.get('/preferences', isAuthenticated, getUserPreferences);
 router.put('/preferences', isAuthenticated, addUserPreferences);
 
 export default router;
-// Compare this snippet from routes/users.js:
