@@ -14,6 +14,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  preferences: {
+    type: [String],
+    default: [],
+    required: false
+  }
 }, { timestamps: true });
 
 

@@ -58,3 +58,47 @@ export const loginUser = async (req, res) => {
   }
 }
 
+export const getUserPreferences = async (req, res) => {
+  const { email } = req.user;
+  try {
+    const user = await User
+      .findOne({ email })
+      .exec();
+    if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+
+    console.log(user);
+
+    return res.status(200).json({ preferences: user.preferences });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
+export const addUserPreferences = async (req, res) => {
+  const { email } = req.user;
+  const { preferences } = req.body;
+
+  if (!preferences || preferences.length === 0) {
+    return res.status(400).json({ message: 'Please provide preferences' });
+  }
+
+  try {
+    const user = await User
+      .findOne({ email })
+      .exec();
+    if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+
+    user.preferences = [...user.preferences, ...preferences];
+    await user.save();
+    return res.status(200).json({ message: 'Preferences updated successfully' });
+  }
+  catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+}
