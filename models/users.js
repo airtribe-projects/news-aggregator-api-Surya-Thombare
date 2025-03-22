@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
   },
   preferences: {
     type: [String],
+    maxlength: 3,
     default: [],
     required: false
   }

@@ -1,6 +1,11 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
+import { getNewsByPreference, getTopHealines } from '../controller/news.js';
+import { isAuthenticated } from '../middleware/auth.js';
+
+const router = express.Router();
+
+router.get('/', isAuthenticated, getTopHealines);
+router.get('/preferences', isAuthenticated, getNewsByPreference);
 
 
-const app = express();
+export default router;

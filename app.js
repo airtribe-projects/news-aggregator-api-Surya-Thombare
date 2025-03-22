@@ -4,8 +4,7 @@ import db from './lib/db.js';
 
 
 import users from './routes/users.js';
-
-import { getNewsFromGNewsTopHeadline } from './lib/news.js';
+import news from './routes/news.js';
 
 
 const app = express();
@@ -18,8 +17,7 @@ db();
 
 
 app.use('/users', users)
-
-getNewsFromGNewsTopHeadline();
+app.use('/news', news)
 
 app.listen(port, (err) => {
     if (err) {
