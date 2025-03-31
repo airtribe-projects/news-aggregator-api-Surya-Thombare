@@ -15,8 +15,6 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-redisClient
-
 redisClient.on('ready', () => console.log('Redis Client Ready'));
 redisClient.on('connect', () => console.log('Connected to Redis'));
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
