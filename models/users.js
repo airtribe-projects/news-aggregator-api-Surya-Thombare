@@ -17,16 +17,19 @@ const userSchema = new mongoose.Schema({
   favorites: {
     type: [String],
     required: false,
+    unique: true,
     default: []
   },
   read: {
     type: [String],
     required: false,
+    unique: true,
     default: []
   },
   saved: {
     type: [String],
     required: false,
+    unique: true,
     default: []
   },
   preferences: {

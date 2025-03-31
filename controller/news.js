@@ -89,7 +89,8 @@ export const getFavoriteNews = async (req, res) => {
 
 export const addFavoriteNews = async (req, res) => {
   const { email } = req.user;
-  const { articleId } = req.body;
+  const articleId = req.params.id;
+
   if (!articleId) {
     return res.status(400).json({ message: 'Please provide articleId' });
   }
@@ -112,7 +113,8 @@ export const addFavoriteNews = async (req, res) => {
 
 export const removeFavoriteNews = async (req, res) => {
   const { email } = req.user;
-  const { articleId } = req.body;
+  const articleId = req.params.id;
+
   if (!articleId) {
     return res.status(400).json({ message: 'Please provide articleId' });
   }
@@ -158,7 +160,8 @@ export const getReadNews = async (req, res) => {
 
 export const addReadNews = async (req, res) => {
   const { email } = req.user;
-  const { articleId } = req.body;
+  const articleId = req.params.id;
+
   if (!articleId) {
     return res.status(400).json({ message: 'Please provide articleId' });
   }
@@ -181,7 +184,8 @@ export const addReadNews = async (req, res) => {
 
 export const removeReadNews = async (req, res) => {
   const { email } = req.user;
-  const { articleId } = req.body;
+  const articleId = req.params.id;
+
   if (!articleId) {
     return res.status(400).json({ message: 'Please provide articleId' });
   }
@@ -226,7 +230,8 @@ export const getSavedNews = async (req, res) => {
 
 export const addSavedNews = async (req, res) => {
   const { email } = req.user;
-  const { articleId } = req.body;
+  const articleId = req.params.id;
+
   if (!articleId) {
     return res.status(400).json({ message: 'Please provide articleId' });
   }
@@ -249,7 +254,8 @@ export const addSavedNews = async (req, res) => {
 
 export const removeSavedNews = async (req, res) => {
   const { email } = req.user;
-  const { articleId } = req.body;
+  const articleId = req.params.id;
+
   if (!articleId) {
     return res.status(400).json({ message: 'Please provide articleId' });
   }

@@ -2,9 +2,6 @@ import { Redis } from 'ioredis'
 import redis from 'redis';
 import { promisify } from 'util';
 
-// News API Configuration
-const NEWS_API_KEY = process.env.NEWS_API_KEY;
-const NEWS_API_URL = 'https://newsapi.org/v2/top-headlines';
 const DEFAULT_COUNTRY = 'us'; // Default country code
 const REDIS_CACHE_EXPIRATION = 3600; // Cache expiry in seconds (1 hour)
 const REDIS_NEWS_KEY = 'latest_news'; // Redis key for storing news
@@ -14,13 +11,9 @@ export const redisClient = new Redis(
   process.env.REDIS_URL || 'redis://localhost:6379'
 )
 
-
 // Convert Redis callback-based functions to Promise-based
 const getAsync = promisify(redisClient.get).bind(redisClient);
 const setAsync = promisify(redisClient.setex).bind(redisClient);
-
-
-
 
 function buildRedisKey(country, category) {
   let key = REDIS_NEWS_KEY;
@@ -35,9 +28,6 @@ function buildRedisKey(country, category) {
 
   return key;
 }
-
-
-
 
 export async function cacheNewsInRedis(articles, country = DEFAULT_COUNTRY, category = '') {
   try {
@@ -68,3 +58,4 @@ export async function getNewsFromRedis(country = DEFAULT_COUNTRY, category = '')
     return null;
   }
 }
+
