@@ -4,6 +4,9 @@ export const combineTopHeadlines = async () => {
   const topHeadlines1 = await getNewsFromNewsAPITopHeadline();
   const topHeadlines2 = await getNewsFromGNewsTopHeadline();
 
+  console.log('headlineone', topHeadlines1[0]);
+  console.log('headlineone', topHeadlines2[0]);
+
   const topHeadlines = topHeadlines1.concat(topHeadlines2);
 
   return topHeadlines

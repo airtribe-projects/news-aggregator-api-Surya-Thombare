@@ -14,6 +14,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  favorites: {
+    type: [String],
+    required: false,
+    default: []
+  },
+  read: {
+    type: [String],
+    required: false,
+    default: []
+  },
+  saved: {
+    type: [String],
+    required: false,
+    default: []
+  },
   preferences: {
     type: [String],
     maxlength: 3,

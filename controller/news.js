@@ -1,12 +1,32 @@
 import { combineTopHeadlines, combinedNewsByPrefrences } from '../helper/news.js';
+import { storeNewsInDB } from '../lib/news.js';
 import User from '../models/users.js';
+import { cacheNewsInRedis, getNewsFromRedis } from '../redis/utills.js';
 
 export const getTopHealines = async (req, res) => {
   try {
 
+    const cachedNews = await getNewsFromRedis();
+
+    if (cachedNews) {
+      // Return cached news if available
+      return res.json({
+        source: 'cache',
+        articles: cachedNews
+      });
+    }
+
+    // Fix This : First store the news in the database and then cache it in Redis and then return the response from database
+
     const news = await combineTopHeadlines();
 
-    return res.status(200).json({ news });
+    const savedNews = await storeNewsInDB(news);
+
+    console.log('Saved news:', savedNews);
+
+    await cacheNewsInRedis(savedNews);
+
+    return res.status(200).json({ source: 'api', savedNews });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Internal server error' });
